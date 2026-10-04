@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Hayati</title>
+<meta name="theme-color" content="#14070e">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕯️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div id="glow" aria-hidden="true"></div>
+<div id="bar" aria-hidden="true"><i></i></div>
+<button id="music" class="hide" aria-label="Play music" aria-pressed="false">♪</button>
+<audio id="aud" loop preload="none"></audio>
+
+<main>
+<!-- 1 OPENING -->
+<section class="screen center on" id="s-open">
+  <p class="soft rv">For the girl who became my home.</p>
+  <p class="small rv" style="--d:.9s">Before you read anything…</p>
+  <button class="btn rv" style="--d:1.8s" data-go="s-now">Open this, Hayati →</button>
+</section>
+
+<!-- 2 RIGHT NOW -->
+<section class="screen center" id="s-now">
+  <h2 class="rv">Come here for a second, Hayati.</h2>
+  <div class="lines">
+    <p class="rv">You don’t have to be okay right now.</p>
+    <p class="rv">You don’t have to explain everything.</p>
+    <p class="rv">You don’t have to pretend you’re fine for me.</p>
+    <p class="rv">Whatever happened today, you don’t have to carry it alone.</p>
+    <p class="rv">I can’t magically fix everything that hurts you, but I can stay.</p>
+    <p class="rv">I can listen. I can sit with you through the silence.</p>
+    <p class="rv">And when you’re ready to smile again, I’ll be right here, trying my hardest to be one of the reasons you do.</p>
+  </div>
+  <p class="ask rv">Do you want to stay here for a little while?</p>
+  <div class="row rv" id="stay-btns">
+    <button class="btn ghost" data-stay="Then stay. There’s nowhere else you need to be right now.">Yes, stay with me</button>
+    <button class="btn ghost" data-stay="Then just take this minute. You don’t have to solve everything tonight.">Maybe for a minute</button>
+  </div>
+  <p class="reply" id="stay-msg"></p>
+  <button class="btn hide" id="stay-next" data-go="s-remember">Continue</button>
+</section>
+
+<!-- 3 REMEMBER -->
+<section class="screen" id="s-remember">
+  <h2 class="center-t rv">Things I want you to remember</h2>
+  <div id="cards"></div>
+  <div class="center-t"><button class="btn rv" data-go="s-sure">Okay, Hayati</button></div>
+</section>
+
+<!-- 4 ARE YOU SURE -->
+<section class="screen center" id="s-sure">
+  <h2 id="sure-q" class="swap"></h2>
+  <div class="row" id="sure-btns"></div>
+  <p class="reply" id="sure-msg"></p>
+</section>
+
+<!-- 5 LETTER -->
+<section class="screen" id="s-letter">
+  <div class="paper" id="letter"></div>
+  <div class="center-t"><button class="btn rv" data-go="s-story">Continue</button></div>
+</section>
+
+<!-- 6 STORY -->
+<section class="screen" id="s-story">
+  <h2 class="center-t rv">Our story isn’t finished.</h2>
+  <div class="tl" id="tl"></div>
+  <div class="center-t"><button class="btn rv" data-go="s-q">Continue</button></div>
+</section>
+
+<!-- 7+8 QUESTIONS -->
+<section class="screen center" id="s-q">
+  <h2 class="rv">Now I want to know you deeper.</h2>
+  <p class="small rv">Take your time. Write as much or as little as you want. Everything saves on this phone as you go.</p>
+  <div class="qwrap rv">
+    <p class="count" id="q-count"></p>
+    <p class="qtext swap" id="q-text"></p>
+    <textarea id="q-area" rows="6" placeholder="Write here…" aria-label="Your answer"></textarea>
+    <div class="namebox hide" id="name-box">
+      <label for="q-name" class="small">Sign it, if you’d like</label>
+      <input id="q-name" type="text" placeholder="Your name" autocomplete="name">
+    </div>
+    <p class="err" id="q-err" role="alert"></p>
+    <div class="row">
+      <button class="btn ghost" id="q-back">Back</button>
+      <button class="btn" id="q-next">Next</button>
+    </div>
+  </div>
+  <div class="thanks hide" id="thanks">
+    <h2>Thank you for letting me know a little more of your heart.</h2>
+    <p class="soft">I’ll read every word.</p>
+    <button class="btn" data-go="s-future">Continue</button>
+  </div>
+</section>
+
+<!-- 9 FUTURE -->
+<section class="screen future" id="s-future">
+  <p class="big rv">I don’t know exactly what every year ahead of us will look like.</p>
+  <p class="big rv">But I know who I want beside me while I find out.</p>
+  <p class="you rv">You.</p>
+  <div class="center-t"><button class="btn rv" data-go="s-marry">Continue</button></div>
+</section>
+
+<!-- 10 MARRIAGE -->
+<section class="screen center" id="s-marry">
+  <p class="soft rv">And yes, Hayati…</p>
+  <p class="big rv" style="--d:1.2s">One day, I want this little website to be nothing compared to the life we actually build together.</p>
+  <button class="btn rv" id="m-open" style="--d:2.4s">See what I really want</button>
+  <div id="m-lines" class="mlines"></div>
+  <button class="btn hide" id="m-next" data-go="s-final">Continue</button>
+</section>
+
+<!-- 11+12 FINAL -->
+<section class="screen center" id="s-final">
+  <button class="btn rv" id="f-open">One more thing…</button>
+  <div id="f-body" class="hide">
+    <div class="nick" id="nick-final"></div>
+    <p class="soft fl">From the man who is ridiculously, stubbornly, completely sure about you.</p>
+    <p class="small fl">Until then…</p>
+    <p class="keep fl">Keep choosing me.</p>
+    <div class="back fl">
+      <p class="small">If you ever have a really bad day…</p>
+      <button class="btn ghost" id="again">Open this again</button>
+      <p class="reply tall" id="again-msg"></p>
+    </div>
+  </div>
+</section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
